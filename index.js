@@ -10,5 +10,5 @@ var app = express();
 controllers(app);
 
 app.listen(process.env.port || 3000,function(){
-	console.log("Listening on 8000");
+	console.log("Listening on " + process.env.port);
 })
