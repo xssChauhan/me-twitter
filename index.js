@@ -31,9 +31,7 @@ app.get("/:user",(req,res) => {
   console.log("Users");
   let user = req.params.user;
   disk.loadUser(user).then((a) => {
-    disk.writeUser(user,"twitter",{"accessToken" : 1234}).then((f) => {
-      res.send(a);
-    })
+    res.send(a);
   })
 });
 
