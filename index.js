@@ -3,10 +3,13 @@
 require("./lib/globals");
 
 var express = require("express"),
-	controllers = include("controllers");
-var app = express();
-var path = require("path");
-var disk = include("api/disk");
+    controllers = include("controllers"),
+    app = express(),
+    cookieParser = require("cookie-parser"),
+    path = require("path"),
+    disk = include("api/disk");
+
+app.use(cookieParser());
 
 controllers(app);
 
@@ -14,12 +17,16 @@ app.get('/',function(req,res){
 	res.sendFile(path.join(__dirname+"/index.html"));
 });
 
-app.get("/file",function(req,res){
-		disk.write(JSON.stringify({
-			user : "shikhar",
-			code : "fk37"
-		}));
+app.get("/files",function(req,res){
+	disk.loadUsers().then((a) => {
+		res.send(userData);
+	});
+});
+
+app.get('/cookies',(req,res) => {
+  res.send(req.cookies.user);
 })
+
 app.listen(process.env.PORT || 3000,function(){
 	console.log("Listening on " + process.env.port);
 });
