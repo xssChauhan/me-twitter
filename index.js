@@ -24,8 +24,17 @@ app.get("/files",function(req,res){
 });
 
 app.get('/cookies',(req,res) => {
-  res.send(req.cookies.user);
-})
+  res.send(req.cookies);
+});
+
+app.get("/:user",(req,res) => {
+  console.log("Users");
+  let user = req.params.user;
+  disk.loadUser(user).then((a) => {
+    res.send(a);
+  })
+});
+
 
 app.listen(process.env.PORT || 3000,function(){
 	console.log("Listening on " + process.env.port);
