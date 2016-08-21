@@ -5,9 +5,12 @@ require("./lib/globals");
 var express = require("express"),
     controllers = include("controllers"),
     app = express(),
+    Promise = require("bluebird"),
     cookieParser = require("cookie-parser"),
     path = require("path"),
-    disk = include("api/disk");
+    disk = include("api/disk"),
+    me = include("api/_meList"),
+    _ = require("lodash");
 
 app.use(cookieParser());
 
@@ -25,6 +28,24 @@ app.get("/files",function(req,res){
 
 app.get('/cookies',(req,res) => {
   res.send(req.cookies);
+});
+
+app.get("/users",(req,res) =>{
+    disk.loadUsers().then((a) => {
+      res.send(a);
+    })
+});
+
+app.get("/test",(req,res) => {
+  disk.loadUsers(true).then((a)=>{
+    Promise.map(a,(e,i,l) => {
+        return me.getSearchData(e);
+    }).map((a) => {
+        return _.set(a,"signed","xss");
+    }).then((a) => {
+      res.send(a);
+    });
+  });
 });
 
 app.get("/:user",(req,res) => {

@@ -8,6 +8,6 @@ var twitter = new Twitter({
     consumerSecret: "1VRjUoF6vCZoviVSK1zQKW38sEL4YKdPUOuGobytcZTUS2fwlU",
     callback: "https://me-twitter.herokuapp.com/access-token"
 });
-twitter.search({q:"#meList"},accessToken,accessSecret,function(err,data,resp){
+twitter.search("tweets",{q:"#meList"},accessToken,accessSecret,function(err,data,resp){
   console.log(data);
 });
