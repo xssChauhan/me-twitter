@@ -31,9 +31,9 @@ app.get('/cookies',(req,res) => {
 });
 
 app.get("/users",(req,res) =>{
-    disk.loadUsers().then((a) => {
-      res.send(a);
-    })
+    disk.loadUsers().then(a => {
+      res.send(userData);
+    });
 });
 
 app.get("/test",(req,res) => {
@@ -48,13 +48,13 @@ app.get("/test",(req,res) => {
   });
 });
 
-app.get("/:user",(req,res) => {
-  console.log("Users");
-  let user = req.params.user;
-  disk.loadUser(user).then((a) => {
-    res.send(a);
-  })
-});
+// app.get("/:user",(req,res) => {
+//   console.log("Users");
+//   let user = req.params.user;
+//   disk.loadUser(user).then((a) => {
+//     res.send(a);
+//   })
+// });
 
 
 app.listen(process.env.PORT || 3000,function(){
