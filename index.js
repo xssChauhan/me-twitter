@@ -32,20 +32,14 @@ app.get('/cookies',(req,res) => {
 
 app.get("/users",(req,res) =>{
     disk.loadUsers().then(a => {
-      res.send(userData);
+      res.send(a);
     });
 });
 
 app.get("/test",(req,res) => {
-  disk.loadUsers(true).then((a)=>{
-    Promise.map(a,(e,i,l) => {
-        return me.getSearchData(e);
-    }).map((a) => {
-        return _.set(a,"signed","xss");
-    }).then((a) => {
-      res.send(a);
-    });
-  });
+  me.getSearchData().then(a => {
+    res.send(a);
+  })
 });
 
 // app.get("/:user",(req,res) => {
