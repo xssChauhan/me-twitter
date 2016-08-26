@@ -1,17 +1,41 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-        <script>
-            $(function() {
-                $("#sign-in-with-twitter").on("click", function() {
-                    window.location.href = "https://me-twitter.herokuapp.com/request-token";
-                });
+
+<head>
+</head>
+
+<body>
+    <button id="sign-in-with-twitter">Sign in with Twitter!</button>
+    <blockquote class="twitter-tweet">
+      <a href="https://twitter.com/realmadriden/status/767435116167696384"></a>
+    </blockquote>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script>
+        $(function() {
+            $("#sign-in-with-twitter").on("click", function() {
+                window.location.href = "https://me-twitter.herokuapp.com/request-token";
             });
-        </script>
-    </head>
-    <body>
-        <button id="sign-in-with-twitter">Sign in with Twitter!</button>
-    </body>
+        });
+    </script>
+    <script>
+        window.twttr = (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0],
+                t = window.twttr || {};
+            if (d.getElementById(id)) return t;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
+
+            t._e = [];
+            t.ready = function(f) {
+                t._e.push(f);
+            };
+
+            return t;
+        }(document, "script", "twitter-wjs"));
+    </script>
+</body>
+
 </html>
